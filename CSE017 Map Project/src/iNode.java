@@ -1,51 +1,46 @@
-
+import java.util.ArrayList;
 
 /**
  * @author Evan Hruskar
  * @author Tyler Hogue
- * @version 2018.04.16
- *
+ * @version 2018.04.18
+ * @param <E> The type of location information to be 
+ * stored in the node
  */
 public interface iNode<E> {
-
-    /**
-     * @return The location of the node (x,y)
-     */
-    public E getLocation();
     
     /**
-     * Set the location of the node container
-     * 
-     * @param location The new (x,y) location for the node 
+     * @return the name of a place in ArrayList of places stored
+     * in this node
      */
-    public void setLocation(E location);
+    public String getPlace();
     
     /**
-     * @return the names of places in an array list of strings
+     * @return the list of places at this location
      */
-    public ArrayList<E> getPlaces();
+    public ArrayList<E> getPlaceList();
     
     /**
-     * Insert list of places
-     * @param list The list of places to be added
+     * Insert a place into the list for that location
+     * @param place name of the place to be inserted
      */
-    public void setPlaces(ArrayList<E> list);
+    public void insertPlace(String place);
     
     /**
-     * @return information about the node
+     * @return Point data about location (x and y coordinates)
      */
      
-    public E getData();
+    public E getPoint();
     
     /**
      * Stores new data in the node at Point
-     * @param data The data to be added to the node
+     * @param point The point data to be associated with the node
      */
-    public void setData(E data);
+    public void setPoint(E point);
     
     /**
-     * @return String representation of the data and places in
-     * the node
+     * @return String representation of the data and list of
+     * places in the node
      */
     public String toString();
 }
