@@ -4,7 +4,7 @@
  * @author Cam
  * @version 2018.04.18
  */
-public class Point implements PointInterface {
+public class Point implements iPoint {
     private int x;
     private int y;
 
