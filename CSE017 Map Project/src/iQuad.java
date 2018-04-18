@@ -1,3 +1,5 @@
+import java.util.List;
+
 /**
  * 
  */
@@ -23,32 +25,31 @@ public interface iQuad {
     //Constructor like so: public Quad(Point topLeft, Point botRight)
     
     /**
-     * @param p a point
-     * @return true if the point is in bounds
-     * 
+     * Are the bounds inclusive or exclusive?
      * It will be helpful to create a method that takes a Point variable as parameter 
      * and return true if a node is within the bounds of a quadrant or false otherwise.
+     * 
+     * @param p a point
+     * @return true if the point is in bounds
      */
     public boolean inQuad(Point p);
     
     /**
-     * @param x of location
-     * @param y of location
-     * @param description of location E.g. school, restaurant, home, bank, etc.
-     * 
      * This method takes the x and y coordinates of the location and a description of the 
      * location. In this assignment we will limit the description to the type of business or 
      * organization. E.g. school, restaurant, home, bank, etc.
      * This method will create a new Node (newNode) object with the parameters, and call 
      * the recursive insert method (described below) that takes a newNode object as a 
      * parameter
+     * 
+     * @param x of location
+     * @param y of location
+     * @param description of location E.g. school, restaurant, home, bank, etc.
      */
     public void insert(int x, int y, String description);
     
     /**
      * This is the recursive helper method for insert
-     * 
-     * @param newNode the node to insert
      * 
      * Base cases
      * (1) If newNode is null then end recursion (return)
@@ -70,24 +71,23 @@ public interface iQuad {
      * Set topLeftTree to a new Quad with bounds:
      * (topLeft.X, topLeft.Y) and (topLeft.X + botRight.X) / 2,(topLeft.Y + botRight.Y) / 2)
      * - call insert on topLeftTree with newNode as a parameter. Ex topLeftTree.insert(newNode)
+     * 
+     * @param newNode the node to insert
      */
     public void insert(Node<Point> newNode);
     
     /**
-     * @param x of location
-     * @param y of location
-     * @return node which has all data/places related to that location
-     * 
      * This method takes the x and y coordinates of the location and return the Node 
      * containing all the data/places related to that location. This method creates a Point 
      * object (P) and calls the recursive search method with P as parameter
+     * 
+     * @param x of location
+     * @param y of location
+     * @return node which has all data/places related to that location
      */
     public Node<Point> search(int x, int y);
     
     /**
-     * @param p the location to search for
-     * @return node containing all data/places for that location
-     * 
      * Base cases
      * (1) Current quad cannot contain P 
      * - outside of the boundaries
@@ -100,14 +100,13 @@ public interface iQuad {
      * if P is in topLeftTree
      * - if topLeftTree is null end recursion (return null)
      * - else call search on topLeftTree with P as parameter
+     * 
+     * @param p the location to search for
+     * @return node containing all data/places for that location
      */
     public Node<Point> search(Point p);
     
     /**
-     * 
-     * @param type_of_place we are looking for
-     * @return list containing all the nodes with such places
-     * 
      * This method takes a String representing the type of place/business the user is 
      * interested in (bank, hospital, school, etc.), and return a list containing all the nodes 
      * with such places. 
@@ -116,22 +115,12 @@ public interface iQuad {
      * The design and implementation of this recursive (other) search method is entirely 
      * up to you.
      * 
-     */
-    public ArrayList<Node<Point>> search (String type_of_place);
-    
-    
-    /**
-     * 
-     * @param type_of_place the type of place we're looking for
-     * @param foundPlaces the places we've already found
-     * 
-     * @return list containing all nodes with such places
-     * 
      * The idea is this recursion will split 4 times and search every node in the Quad.
      * It will add to the arraylist and return it as a base case when there's nothing left
      * (Quad size gets to one or next quads are all null?)
+     * 
+     * @param type_of_place we are looking for
+     * @return list containing all the nodes with such places
      */
-    public ArrayList<Node<Point>> search (String type_of_place, ArrayList<Node<Point>> foundPlaces);
-    
-
+    public List<Node<Point>> search (String type_of_place);
 }
