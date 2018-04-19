@@ -9,10 +9,8 @@ public class Point implements iPoint {
     private int y;
 
     /**
-     * @param x
-     *            the x value
-     * @param y
-     *            the y value
+     * @param x the x value
+     * @param y the y value
      */
     public Point(int x, int y) {
         this.x = x;

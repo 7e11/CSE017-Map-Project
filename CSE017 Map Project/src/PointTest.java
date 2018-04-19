@@ -45,6 +45,8 @@ public class PointTest extends TestCase {
         assertFalse(a.equals(b));
         Point c = null;
         assertFalse(a.equals(c));
+        //Evan: added this for coverage
+        assertFalse(a.equals(123));
 
     }
 

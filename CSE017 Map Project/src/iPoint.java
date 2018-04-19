@@ -15,16 +15,14 @@ public interface iPoint {
     public int getY();
 
     /**
-     * @param x
-     *            x value
-     * @return sets x value
+     * @param x x value
+     * @return the new x value
      */
     public int setX(int x);
 
     /**
-     * @param y
-     *            y value
-     * @return sets y value
+     * @param y y value
+     * @return the new y value
      */
     public int setY(int y);
 
