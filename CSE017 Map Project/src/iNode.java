@@ -9,16 +9,11 @@ import java.util.ArrayList;
  */
 public interface iNode<E> {
     
-    /**
-     * @return the name of a place in ArrayList of places stored
-     * in this node
-     */
-    public String getPlace();
     
     /**
      * @return the list of places at this location
      */
-    public ArrayList<E> getPlaceList();
+    public ArrayList<String> getPlaces();
     
     /**
      * Insert a place into the list for that location
