@@ -37,8 +37,8 @@ public class Quad implements iQuad {
     @Override
     public boolean inQuad(Point p) {
         if (p.getX() >= topLeft.getX() &&
-                p.getX() <= botRight.getX() &&
                 p.getY() >= topLeft.getY() &&
+                p.getX() <= botRight.getX() &&
                 p.getY() <= botRight.getY()) {
             //recall botRight has larger y than topLeft
             return true;
@@ -76,6 +76,8 @@ public class Quad implements iQuad {
             return;
         }
         //recursive calls:
+        //The ceil notaiton is super gross. but necessary to avoid floor (ints)
+        //dividing by 2d in order to avoid the floor, then manually use ceiling.
         //topLeftTree
         if ((topLeft.getX() + botRight.getX()) / 2 >= newNode.getPoint().getX() && 
                 (topLeft.getY() + botRight.getY()) / 2 >= newNode.getPoint().getY()) {
@@ -87,36 +89,31 @@ public class Quad implements iQuad {
             return;
         }
         //botLeftTree
-        if ((topLeft.getX() + botRight.getX()) / 2 >= newNode.getPoint().getX() && 
-                (topLeft.getY() + botRight.getY()) / 2 < newNode.getPoint().getY()) {
+        if ((topLeft.getX() + botRight.getX()) / 2 >= newNode.getPoint().getX()) {
             if (botLeftTree == null) {
-                botLeftTree = new Quad(new Point(topLeft.getX(), (topLeft.getY() + botRight.getY()) / 2), 
+                botLeftTree = new Quad(new Point(topLeft.getX(), (int) Math.ceil((topLeft.getY() + botRight.getY()) / 2d)), 
                         new Point((topLeft.getX() + botRight.getX()) / 2, botRight.getY()));
             }
             botLeftTree.insert(newNode);
             return;
         }
         //topRightTree
-        if ((topLeft.getX() + botRight.getX()) / 2 < newNode.getPoint().getX() && 
-                (topLeft.getY() + botRight.getY()) / 2 >= newNode.getPoint().getY()) {
+        if ((topLeft.getY() + botRight.getY()) / 2 >= newNode.getPoint().getY()) {
             if (topRightTree == null) {
-                topRightTree = new Quad(new Point((topLeft.getX() + botRight.getX()) / 2, topLeft.getY()), 
+                topRightTree = new Quad(new Point((int) Math.ceil((topLeft.getX() + botRight.getX()) / 2d), topLeft.getY()), 
                         new Point(botRight.getX(), (topLeft.getY() + botRight.getY()) / 2));
             }
             topRightTree.insert(newNode);
             return;
         }
-        //botRightTree
-        if ((topLeft.getX() + botRight.getX()) / 2 < newNode.getPoint().getX() && 
-                (topLeft.getY() + botRight.getY()) / 2 < newNode.getPoint().getY()) {
-            if (botRightTree == null) {
-                Point mid = new Point((topLeft.getX() + botRight.getX()) / 2, (topLeft.getY() + botRight.getY()) / 2);
-                botRightTree = new Quad(mid, botRight);
-            }
-            botRightTree.insert(newNode);
-            return;
-        }
         
+        //botRightTree
+        if (botRightTree == null) {
+            Point mid = new Point((int) Math.ceil((topLeft.getX() + botRight.getX()) / 2d), (int) Math.ceil((topLeft.getY() + botRight.getY()) / 2d));
+            botRightTree = new Quad(mid, botRight);
+        }
+        botRightTree.insert(newNode);
+        return;
     }
 
     /* (non-Javadoc)
@@ -148,25 +145,18 @@ public class Quad implements iQuad {
             return topLeftTree.search(p);
         }
         //botLeftTree
-        if ((topLeft.getX() + botRight.getX()) / 2 >= p.getX() && 
-                (topLeft.getY() + botRight.getY()) / 2 < p.getY()) {
+        if ((topLeft.getX() + botRight.getX()) / 2 >= p.getX()) {
             if (botLeftTree == null) return null;
             return botLeftTree.search(p);
         }
         //topRightTree
-        if ((topLeft.getX() + botRight.getX()) / 2 < p.getX() && 
-                (topLeft.getY() + botRight.getY()) / 2 >= p.getY()) {
+        if ((topLeft.getY() + botRight.getY()) / 2 >= p.getY()) {
             if (topRightTree == null) return null;
             return topRightTree.search(p);
         }
         //botRightTree
-        if ((topLeft.getX() + botRight.getX()) / 2 < p.getX() && 
-                (topLeft.getY() + botRight.getY()) / 2 < p.getY()) {
-            if (botRightTree == null) return null;
-            return botRightTree.search(p);
-        }
-        return null;
-        //this will run if we get to size 1 and location is null.
+        if (botRightTree == null) return null;
+        return botRightTree.search(p);
     }
 
     /* (non-Javadoc)
