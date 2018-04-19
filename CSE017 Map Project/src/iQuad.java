@@ -7,24 +7,22 @@ import java.util.List;
 /**
  * @author Evan Hruskar
  * @version 2018.04.16
- *
  */
 public interface iQuad {
     /*
-     *     2 Point variables data fields: topLeft and botRight, representing the top left and 
-     *     bottom right points respectively.
-     *     
-     *     1 Node variable data field to store the coordinates and additional information 
-     *     about the location (type of location: restaurant, school, etc.)
-     *     
-     *     4 Quad variables data fields: topLeftTree , topRightTree, botLeftTree, 
-     *     botRightTree; representing the top left, top right, bottom left,  and bottom right 
-     *     quadrants of the map respectively.
+     * 2 Point variables data fields: topLeft and botRight, representing the top left and 
+     * bottom right points respectively.
+     * 1 Node variable data field to store the coordinates and additional information 
+     * about the location (type of location: restaurant, school, etc.)
+     * 4 Quad variables data fields: topLeftTree , topRightTree, botLeftTree,botRightTree; 
+     * representing the top left, top right, bottom left, and bottom right 
+     * quadrants of the map respectively.
+     * 
+     * Constructor like so: public Quad(Point topLeft, Point botRight)
      */
     
-    //Constructor like so: public Quad(Point topLeft, Point botRight)
-    
     /**
+     * O(1)
      * Are the bounds inclusive or exclusive?
      * It will be helpful to create a method that takes a Point variable as parameter 
      * and return true if a node is within the bounds of a quadrant or false otherwise.
@@ -35,6 +33,7 @@ public interface iQuad {
     public boolean inQuad(Point p);
     
     /**
+     * O(log(n))
      * This method takes the x and y coordinates of the location and a description of the 
      * location. In this assignment we will limit the description to the type of business or 
      * organization. E.g. school, restaurant, home, bank, etc.
@@ -49,6 +48,7 @@ public interface iQuad {
     public void insert(int x, int y, String description);
     
     /**
+     * O(log(n))
      * This is the recursive helper method for insert
      * 
      * Base cases
@@ -77,6 +77,7 @@ public interface iQuad {
     public void insert(Node<Point> newNode);
     
     /**
+     * O(log(n))
      * This method takes the x and y coordinates of the location and return the Node 
      * containing all the data/places related to that location. This method creates a Point 
      * object (P) and calls the recursive search method with P as parameter
@@ -88,6 +89,7 @@ public interface iQuad {
     public Node<Point> search(int x, int y);
     
     /**
+     * O(log(n))
      * Base cases
      * (1) Current quad cannot contain P 
      * - outside of the boundaries
@@ -107,6 +109,7 @@ public interface iQuad {
     public Node<Point> search(Point p);
     
     /**
+     * O(n)
      * This method takes a String representing the type of place/business the user is 
      * interested in (bank, hospital, school, etc.), and return a list containing all the nodes 
      * with such places. 
