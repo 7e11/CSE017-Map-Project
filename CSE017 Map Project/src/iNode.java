@@ -16,12 +16,6 @@ public interface iNode<E> {
     public ArrayList<String> getPlaces();
     
     /**
-     * Insert a place into the list for that location
-     * @param place name of the place to be inserted
-     */
-    public void insertPlace(String place);
-    
-    /**
      * @return Point data about location (x and y coordinates)
      */
      

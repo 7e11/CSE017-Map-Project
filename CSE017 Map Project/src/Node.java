@@ -22,14 +22,6 @@ public class Node<E> implements iNode<E> {
     }
 
     @Override
-    public void insertPlace(String place) {
-        list.add(place);
-        // O(1): places are added at the end of the list, so
-        // no shifting is required in ArrayList
-        
-    }
-
-    @Override
     
     // O(1): simply returns the location data field  
     public E getPoint() {
