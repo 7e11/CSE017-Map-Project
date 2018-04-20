@@ -1,16 +1,10 @@
 import java.util.ArrayList;
 
 /**
- * 
- */
-
-/**
  * @author Evan Hruskar
  * @version 2018.04.18
- *
  */
 public class Quad implements iQuad {
-
     private Point topLeft;
     private Point botRight;
     
@@ -22,7 +16,6 @@ public class Quad implements iQuad {
     private Quad botRightTree;
 
     /**
-     * 
      * @param topLeft
      * @param botRight
      */
@@ -62,15 +55,17 @@ public class Quad implements iQuad {
      */
     @Override
     public void insert(Node<Point> newNode) {
-        if (newNode == null) return;
-        if (!inQuad(newNode.getPoint())) return;
+        if (newNode == null) {
+            return;
+        }
+        if (!inQuad(newNode.getPoint())) {
+            return;
+        }
         //if size is 1, cannot subdivide further
-        // TODO this might be incorrect
         if (topLeft.equals(botRight)) {
             if (location == null) {
                 location = newNode;
-            }
-            else {
+            } else {
                 location.getPlaces().addAll(newNode.getPlaces());
             }
             return;
@@ -141,21 +136,29 @@ public class Quad implements iQuad {
         //topLeftTree
         if ((topLeft.getX() + botRight.getX()) / 2 >= p.getX() && 
                 (topLeft.getY() + botRight.getY()) / 2 >= p.getY()) {
-            if (topLeftTree == null) return null;
+            if (topLeftTree == null) {
+                return null;
+            }
             return topLeftTree.search(p);
         }
         //botLeftTree
         if ((topLeft.getX() + botRight.getX()) / 2 >= p.getX()) {
-            if (botLeftTree == null) return null;
+            if (botLeftTree == null) {
+                return null;
+            }
             return botLeftTree.search(p);
         }
         //topRightTree
         if ((topLeft.getY() + botRight.getY()) / 2 >= p.getY()) {
-            if (topRightTree == null) return null;
+            if (topRightTree == null) {
+                return null;
+            }
             return topRightTree.search(p);
         }
         //botRightTree
-        if (botRightTree == null) return null;
+        if (botRightTree == null) {
+            return null;
+        }
         return botRightTree.search(p);
     }
 
@@ -165,11 +168,9 @@ public class Quad implements iQuad {
     @Override
     public ArrayList<Node<Point>> search(String type_of_place) {
         ArrayList<Node<Point>> foundPlaces = new ArrayList<Node<Point>>();
-        if (location != null) {
+        if (location != null && location.getPlaces().contains(type_of_place)) {
             //we've reached the end of the tree
-            if(location.getPlaces().contains(type_of_place)) {
-                foundPlaces.add(location);
-            }
+            foundPlaces.add(location);
         }
         if (topLeftTree != null) {
              foundPlaces.addAll(topLeftTree.search(type_of_place));

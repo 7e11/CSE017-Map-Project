@@ -3,19 +3,11 @@ import student.TestCase;
 /**
  * @author Cam
  * @version 2018.04.18
- *
  */
 public class PointTest extends TestCase {
     private Point a;
     private Point b;
 
-    /**
-     * empty constructor
-     */
-    public PointTest() {
-    //empty constructor 
-    }
-    
     public void setUp() {
         a = new Point(6, 7);
         b = new Point(3, 7);
@@ -31,7 +23,6 @@ public class PointTest extends TestCase {
         assertEquals(8, a.getX());
         a.setY(9);
         assertEquals(9, a.getY());
-
     }
 
     /**
@@ -47,7 +38,6 @@ public class PointTest extends TestCase {
         assertFalse(a.equals(c));
         //Evan: added this for coverage
         assertFalse(a.equals(123));
-
     }
 
     /**

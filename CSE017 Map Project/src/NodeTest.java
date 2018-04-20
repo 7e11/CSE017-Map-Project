@@ -7,19 +7,11 @@ import student.TestCase;
  *
  */
 public class NodeTest extends TestCase {
-    
     private Node<Point> node1;
     private ArrayList<String> list1;
     
     private Node<Point> node2;
     private ArrayList<String> list2;
-    
-    /**
-     * Constructor to build testing framework
-     */
-    public NodeTest() {
-        //empty cpnstructor for sake of Java
-    }
     
     /**
      * Set up testing variables
@@ -39,7 +31,7 @@ public class NodeTest extends TestCase {
     }
     
     /**
-     * Set the location fo the node
+     * Set the location for the node
      */
     public void testSetPoint() {
         Point pt = new Point(3, 3);
@@ -66,7 +58,7 @@ public class NodeTest extends TestCase {
     }
     
     /**
-     * Return string represensation of location and information at
+     * Return string representation of location and information at
      * that location
      */
     public void testToString() {

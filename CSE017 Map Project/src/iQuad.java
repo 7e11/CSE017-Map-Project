@@ -1,10 +1,6 @@
 import java.util.List;
 
 /**
- * 
- */
-
-/**
  * @author Evan Hruskar
  * @version 2018.04.16
  */
@@ -18,7 +14,8 @@ public interface iQuad {
      * representing the top left, top right, bottom left, and bottom right 
      * quadrants of the map respectively.
      * 
-     * Constructor like so: public Quad(Point topLeft, Point botRight)
+     * Constructor like so: 
+     * public Quad(Point topLeft, Point botRight)
      */
     
     /**

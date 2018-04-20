@@ -6,16 +6,10 @@ import org.junit.Test;
 import student.TestCase;
 
 /**
- * 
- */
-
-/**
  * @author Evan Hruskar
  * @version 2018.04.19
- *
  */
 public class QuadTest extends TestCase {
-    
     private Quad map;
 
     /* (non-Javadoc)
@@ -166,7 +160,5 @@ public class QuadTest extends TestCase {
         //probably b/c node doesn't have a .equals()
         //but it does have a toString() !
         assertEquals(check.toString(), map.search("baron").toString());
-       
     }
-
 }

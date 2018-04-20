@@ -9,6 +9,7 @@ public class Point implements iPoint {
     private int y;
 
     /**
+     * O(1)
      * @param x the x value
      * @param y the y value
      */
@@ -19,25 +20,21 @@ public class Point implements iPoint {
 
     @Override
     public int getX() {
-
         return x;
     }
 
     @Override
     public int getY() {
-
         return y;
     }
 
     @Override
     public int setX(int x) {
-
         return this.x = x;
     }
 
     @Override
     public int setY(int y) {
-
         return this.y = y;
     }
 
@@ -55,5 +52,4 @@ public class Point implements iPoint {
     public String toString() {
         return "(" + x + "," + y + ")";
     }
-
 }
