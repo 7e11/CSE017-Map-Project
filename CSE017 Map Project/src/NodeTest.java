@@ -35,13 +35,50 @@ public class NodeTest extends TestCase {
      * return the location of the node
      */
     public void testGetPoint() {
-        assertEquals("(1, 1)", node1.getPoint().toString());
+        assertEquals("(1,1)", node1.getPoint().toString());
     }
     
     /**
      * Set the location fo the node
      */
     public void testSetPoint() {
+        Point pt = new Point(3, 3);
         
+        node1.setPoint(pt);
+        
+        assertEquals("(3,3)", node1.getPoint().toString());
+    }
+    
+    /**
+     * Return list of places at location
+     */
+    public void testGetPlaces() {
+        assertEquals(list1, node1.getPlaces());
+    }
+    
+    /**
+     * Set list of places at location
+     */
+    public void testSetPlaces() {
+        node1.setPlaces(list2);
+        
+        assertEquals(list2, node1.getPlaces());
+    }
+    
+    /**
+     * Return string represensation of location and information at
+     * that location
+     */
+    public void testToString() {
+        assertEquals("No places @ (1,1)", node1.toString());
+        
+        list1.add("Business");
+        assertEquals("[Business, ] @ (1,1)", node1.toString());
+        
+        list1.add("School");
+        assertEquals("[Business, School, ] @ (1,1)", node1.toString());
+        
+        node2.setPoint(null);
+        //catch an exception
     }
 }

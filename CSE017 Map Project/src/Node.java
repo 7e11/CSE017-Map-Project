@@ -20,6 +20,11 @@ public class Node<E> implements iNode<E> {
         
         return list;
     }
+    
+    public void setPlaces(ArrayList<String> places) {
+        
+        list = places;
+    }
 
     @Override
     
@@ -41,6 +46,10 @@ public class Node<E> implements iNode<E> {
     public String toString() {
         if(list.isEmpty()) {
             return "No places @ " + data.toString();
+        }
+        
+        if(data == null) {
+            //needs to throw an exception
         }
         
         String str = "[";
