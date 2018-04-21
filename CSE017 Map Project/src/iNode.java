@@ -3,7 +3,7 @@ import java.util.ArrayList;
 /**
  * @author Evan Hruskar
  * @author Tyler Hogue
- * @version 2018.04.18
+ * @version 2018.04.20
  * @param <E> The type of location information to be 
  * stored in the node
  */
@@ -17,25 +17,25 @@ public interface iNode<E> {
     
     /**
      * O(1)
-     * @param list the list of places to add
+     * @param list the list of places to set for this location
      */
     public void setPlaces(ArrayList<String> list);
     
     /**
-     * O(1): simply returns the location data field  
+     * O(1)
      * @return Point data about location (x and y coordinates)
      */
     public E getPoint();
     
     /**
-     * O(1): sets location to a new value (if ever necessary)
+     * O(1)
      * @param point The point data to be associated with the node
      */
     public void setPoint(E point);
     
     /**
-     * O(n): needs to traverse entire ArrayList of places to concatenate
-     * to "str" and return final result.
+     * O(n): Iterate through the entire list and append list into
+     * output string using ArrayList's toString()
      * @return String representation of the data and list of
      * places in the node
      */

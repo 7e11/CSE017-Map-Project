@@ -39,6 +39,9 @@ public class NodeTest extends TestCase {
         node1.setPoint(pt);
         
         assertEquals("(3,3)", node1.getPoint().toString());
+        
+        node1.setPoint(null);
+        assertNull(node1.getPoint());
     }
     
     /**
@@ -65,12 +68,12 @@ public class NodeTest extends TestCase {
         assertEquals("No places @ (1,1)", node1.toString());
         
         list1.add("Business");
-        assertEquals("[Business, ] @ (1,1)", node1.toString());
+        assertEquals("[Business] @ (1,1)", node1.toString());
         
         list1.add("School");
-        assertEquals("[Business, School, ] @ (1,1)", node1.toString());
-        
-        node2.setPoint(null);
-        //catch an exception
+        assertEquals("[Business, School] @ (1,1)", node1.toString());     
+
+        node1.setPoint(null);
+        assertEquals("A location has not been set", node1.toString());
     }
 }
