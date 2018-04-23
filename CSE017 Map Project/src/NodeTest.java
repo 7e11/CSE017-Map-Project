@@ -2,7 +2,9 @@ import java.util.ArrayList;
 import student.TestCase;
 
 /**
- * @author Tyler Hogue
+ * @author Evan 33%
+ * @author Cam 33%
+ * @author Tyler Hogue 33%
  * @version 2018.4.18
  *
  */

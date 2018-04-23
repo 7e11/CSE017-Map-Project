@@ -1,8 +1,9 @@
 import java.util.ArrayList;
 
 /**
- * @author Evan Hruskar
- * @author Tyler Hogue
+ * @author Evan Hruskar 33%
+ * @author Cam 33%
+ * @author Tyler Hogue 33%
  * @version 2018.04.20
  * @param <E> The type of location information to be 
  * stored in the node

@@ -6,7 +6,9 @@ import org.junit.Test;
 import student.TestCase;
 
 /**
- * @author Evan Hruskar
+ * @author Evan Hruskar 33%
+ * @author Cam 33%
+ * @author Tyler 33%
  * @version 2018.04.19
  */
 public class QuadTest extends TestCase {

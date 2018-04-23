@@ -1,6 +1,8 @@
 
 /**
- * @author Cam
+ * @author Evan 33%
+ * @author Cam 33%
+ * @author Tyler 33%
  * @version 2018.04.18
  */
 public interface iPoint {
