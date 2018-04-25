@@ -24,6 +24,11 @@ public class Quad implements iQuad {
     public Quad(Point topLeft, Point botRight) {
         this.topLeft = topLeft;
         this.botRight = botRight;
+        location = null;
+        topLeftTree = null;
+        topRightTree = null;
+        botLeftTree = null;
+        botRightTree = null;
     }
 
     /* (non-Javadoc)
