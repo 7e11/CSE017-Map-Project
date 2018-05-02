@@ -27,7 +27,6 @@ public class Node<E> implements iNode<E> {
      * @see iNode#getPlaces()
      * O(1)
      */
-// this is a comment
     @Override
     public ArrayList<String> getPlaces() {
         return list;
