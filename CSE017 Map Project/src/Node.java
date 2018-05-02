@@ -10,7 +10,7 @@ import java.util.ArrayList;
 public class Node<E> implements iNode<E> {
     private E data;
     private ArrayList<String> list;
-    
+    //yo
     /**
      * O(1)
      * @param data the information describing the location (coordinate)
