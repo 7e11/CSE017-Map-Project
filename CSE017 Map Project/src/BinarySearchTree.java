@@ -225,7 +225,7 @@ public class BinarySearchTree<T extends Comparable<T>>
      * Internal method to find an item in a subtree.
      * @param x is item to search for.
      * @param node the node that roots the tree.
-     * @return node containing the matched item.
+     * @return node containing the matched item, or null if not found.
      */
     private BinaryNode<T> find(T x, BinaryNode<T> node) {
         if (node == null) {
