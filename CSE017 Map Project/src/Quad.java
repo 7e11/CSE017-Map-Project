@@ -17,6 +17,8 @@ public class Quad implements iQuad {
     private Quad botLeftTree;
     private Quad botRightTree;
 
+    private BinarySearchTree<StreetNodes> bst;
+
     /**
      * @param topLeft
      * @param botRight
@@ -74,6 +76,12 @@ public class Quad implements iQuad {
                 location = newNode;
             } else {
                 location.getPlaces().addAll(newNode.getPlaces());
+                //Added, same deal with streets.
+                //a place with new streets added at the same point will update
+                //the streets present.
+                //however, duplicate streets are not allowed.
+                location.getStreets().removeAll(newNode.getStreets());
+                location.getStreets().addAll(newNode.getStreets());
             }
             return;
         }
@@ -192,5 +200,89 @@ public class Quad implements iQuad {
             foundPlaces.addAll(botRightTree.search(type_of_place));
         }
         return foundPlaces;
+    }
+    
+    /**
+     * remeber to check for duplicates (for both places & streets)
+     * Also be careful with references to newNode.
+     * (it's possible to reference the same memory from both the bst and the quad)
+     * @param x
+     * @param y
+     * @param description a single string description of the location
+     * Note, this description will be the only element in ArrayList    
+     * @param streets
+     */
+    public void insert(int x, int y, String description, String... streets) {
+        
+    }
+    
+    /**
+     * This method takes a street name and returns all the locations on
+     * that street. It calls the find method of the BST class.
+     * Note, streets can only exist in the tree if they have at least one location.
+     * @param streetName the name of the street  we're looking for.
+     * @return all locations on the street if found, null otherwise
+     */
+    public ArrayList<Node<Point>> streetSearch(String streetName) {
+        if (bst.find(new StreetNodes(streetName)) == null) {
+            return new ArrayList<Node<Point>>();
+            //did this instead of returning null to make next methods easier.
+        }
+        return bst.find(new StreetNodes(streetName)).getLocations();
+    }
+    
+    /**
+     * This method takes a street name and a type of place (school, library, etc.)
+     * and returns all the type_of_place locations on that street.
+     * It calls the find method of BST and filters the results.
+     * @param streetName
+     * @param type_of_place
+     * @return all type_of_place locations on the street
+     */
+    public ArrayList<Node<Point>> streetSearch(String streetName, String type_of_place) {
+        ArrayList<Node<Point>> validLocations = new ArrayList<>();
+        for (Node<Point> node : streetSearch(streetName)) {
+            if (node.getPlaces().contains(type_of_place)) {
+                validLocations.add(node);
+            }
+        }
+        return validLocations;
+    }
+    
+    /**
+     * This method takes an origin point, a street name, and a type of place (school, etc.)
+     * and returns all the type of place locations on that street. It calls the find method of BST
+     * and filters the results.
+     * The results are returned in ORDER OF DISTANCE from the origin ASCENDING
+     * update the distance field of the nodes and put all the nodes in a MinHeap.
+     * Call removeMin until the heap is empty.
+     * use distance formula to get distance between two points.
+     * @param originX
+     * @param originY
+     * @param streetName
+     * @param type_of_place
+     * @return all type_of_place locations on the street in ORDER OF DISTANCE
+     *         from the origin ASCENDING (closest...farthest)
+     */
+    public ArrayList<Node<Point>> streetSearch(int originX, int originY, String streetName, String type_of_place) {
+        ArrayList<Node<Point>> validLocations = streetSearch(streetName, type_of_place);
+        for (Node<Point> node : validLocations) {
+            Point p = node.getPoint();
+            double distance = Math.sqrt(Math.pow(originX - p.getX(), 2) + Math.pow(originY - p.getY(), 2));
+            node.setDistance(distance);
+        }
+        //see https://stackoverflow.com/a/530289
+        //not really sure about the right way to cast this stuff
+        //we're going to make a dummy array in order for validLocations
+        //to cast correctly.
+        //Node<Point>[] type = (Node<Point>[]) new Object[0];
+        
+        MinHeap<Node<Point>> heap = new MinHeap<>(validLocations, validLocations.size(), validLocations.size());
+        //could have called with 3rd param = 0
+        ArrayList<Node<Point>> sortedLocations = new ArrayList<>();
+        while (heap.heapsize() > 0) {
+            sortedLocations.add(heap.removemin());
+        }
+        return sortedLocations;
     }
 }

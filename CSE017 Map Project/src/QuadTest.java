@@ -163,4 +163,57 @@ public class QuadTest extends TestCase {
         //but it does have a toString() !
         assertEquals(check.toString(), map.search("baron").toString());
     }
+    
+    /**
+     * 
+     */
+    @Test
+    public void testInsertIntIntStringStringArray() {
+        
+    }
+    
+    /**
+     * 
+     */
+    @Test
+    public void testStreetSearchString() {
+        map.insert(0, 0, "center", "river", "midlane");
+        assertEquals(1, map.streetSearch("river").size()); //one location on street
+        assertEquals(1, map.streetSearch("midlane").size());
+        assertEquals(0, map.streetSearch("doesntexist").size());
+    }
+    
+    /**
+     * 
+     */
+    @Test
+    public void testStreetSearchStringString() {
+        map.insert(0, 0, "scuttle", "river");
+        map.insert(1, 1, "baron", "river");
+        map.insert(2, 2, "dragon", "river");
+        assertEquals(1, map.streetSearch("river", "scuttle").size());
+        assertEquals(0, map.streetSearch("river", "red").size());
+    }
+    
+    /**
+     * 
+     */
+    @Test
+    public void testStreetSearchIntIntStringString() {
+        map.insert(0, 0, "scuttle", "river");
+        map.insert(0, 0, "ahri", "river"); //adds second place to same location
+        //this is vital because otherwise it would be difficult to differentiate the nodes
+        //if they all had just one shared place.
+        map.insert(1, 1, "baron", "river");
+        map.insert(1, 1, "ahri", "river");
+        
+        map.insert(4, 4, "dragon", "river");
+        map.insert(4, 4, "ahri", "river");
+        //desired order with (1,2): baron, scuttle, dragon
+        ArrayList<Node<Point>> sortedDist = map.streetSearch(1, 2, "river", "ahri");
+        assertTrue(sortedDist.get(0).getPlaces().contains("baron"));
+        assertTrue(sortedDist.get(1).getPlaces().contains("scuttle"));
+        assertTrue(sortedDist.get(2).getPlaces().contains("dragon"));
+    }
 }
+
