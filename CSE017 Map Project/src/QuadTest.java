@@ -216,4 +216,3 @@ public class QuadTest extends TestCase {
         assertTrue(sortedDist.get(2).getPlaces().contains("dragon"));
     }
 }
-

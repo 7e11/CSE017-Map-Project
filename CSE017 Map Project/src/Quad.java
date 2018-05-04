@@ -31,6 +31,7 @@ public class Quad implements iQuad {
         topRightTree = null;
         botLeftTree = null;
         botRightTree = null;
+        bst = null;
     }
 
     /* (non-Javadoc)
@@ -213,7 +214,36 @@ public class Quad implements iQuad {
      * @param streets
      */
     public void insert(int x, int y, String description, String... streets) {
+        ArrayList<String> newList = new ArrayList<String>();
+        newList.add(description);
+        Node<Point> newNode = new Node<Point>(new Point(x, y), newList);
+        insert(newNode, streets);
+    }
+    
+    public void insert(Node<Point> newNode, String... streets) {
+        if (newNode == null) {
+            return;
+        }
+        if (!inQuad(newNode.getPoint())) {
+            return;
+        }
+        // if the node is already in the quad, stop the recursion
+        if (newNode.equals(search(newNode.getPoint()))) {
+            return;
+        }
+        insert(newNode);
         
+        for (int i = 0; i < streets.length; i++) {
+            newNode.getPlaces().add(streets[i]);
+            StreetNodes sNode = new StreetNodes(streets[i]);
+            if (!bst.find(sNode).equals(sNode)) {
+                sNode.getPlaces().add(newNode.getPlaces());
+                bst.insert(sNode);
+            }
+            else {
+                bst.find(sNode).getPlaces().add(newNode.getPlaces());
+            }
+        }
     }
     
     /**
