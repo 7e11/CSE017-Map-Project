@@ -90,6 +90,13 @@ public class Node<E> implements iNode<E> {
         return list.toString() + " @ " + data.toString();
     }
     
+    /**
+     * 
+     * @param E, take in a Node obj and 
+     * compares it to the current distance
+     * @return the difference in the distance
+     * O(1)
+     */
     public int compareTo(Node<E> E) {
         if(distance - E.getDistance() > 0) {
             return (int) (distance - E.getDistance());
@@ -103,14 +110,18 @@ public class Node<E> implements iNode<E> {
     }
     
     /**
-     * @return distance
+     * @return distance, its the getter method for
+     * distance
+     * O(1)
      */
     public double getDistance() {
         return distance;
     }
     
     /**
-     * @param distance
+     * @param distance, its the stter method for
+     * distance
+     * O(1)
      */
     public void setDistance(double distance) {
         this.distance = distance;
