@@ -1,5 +1,8 @@
 import java.util.ArrayList;
 
+//import map.Node;
+ //import map;
+
 /**
  * @author Evan Hruskar 33%
  * @author Cam 33%
@@ -10,6 +13,9 @@ import java.util.ArrayList;
 public class Node<E> implements iNode<E> {
     private E data;
     private ArrayList<String> list;
+    private double distance; 
+    private ArrayList<String> adjacentStreet;
+    //These are the new added data field( dstance and adjStreet)
     
     /**
      * O(1)
@@ -20,6 +26,9 @@ public class Node<E> implements iNode<E> {
     public Node(E data, ArrayList<String> list) {
         this.data = data;
         this.list = list;
+        this.setDistance(0);
+        this.adjacentStreet = adjacentStreet;
+        //initialized them in constructor
     }
 
     /*
@@ -79,5 +88,31 @@ public class Node<E> implements iNode<E> {
         }
         
         return list.toString() + " @ " + data.toString();
+    }
+    
+    public int compareTo(Node<E> E) {
+        if(distance - E.getDistance() > 0) {
+            return (int) (distance - E.getDistance());
+        }
+        if (distance - E.getDistance() < 0) {
+            return (int) (distance - E.getDistance());
+        } else {
+            return 0;
+        }
+        
+    }
+    
+    /**
+     * @return distance
+     */
+    public double getDistance() {
+        return distance;
+    }
+    
+    /**
+     * @param distance
+     */
+    public void setDistance(double distance) {
+        this.distance = distance;
     }
 }
