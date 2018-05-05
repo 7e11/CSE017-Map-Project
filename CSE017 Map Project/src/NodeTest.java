@@ -91,6 +91,10 @@ public class NodeTest extends TestCase {
         assertEquals("A location has not been set", node1.toString());
     }
     
+    /**
+     * This is the test class for the getter method
+     * for the distance
+     */
     public void testGetDistance() {
         assertEquals(0,0, nd1.getDistance());
         nd1.setDistance(5.5);
@@ -100,6 +104,10 @@ public class NodeTest extends TestCase {
     
     }
     
+    /**
+     * This is the test method for the setter 
+     * for distance
+     */
     public void testSetDistance() {
         nd1.setDistance(4.5);
         assertEquals(4.5, nd1.getDistance(),0.1);
@@ -108,6 +116,9 @@ public class NodeTest extends TestCase {
 
     }
     
+    /**
+     * This is the test method for the compareTo method
+     */
     public void testCompareTo() {
         nd1.setDistance(0);
         assertEquals(0, nd1.compareTo(nd1));
