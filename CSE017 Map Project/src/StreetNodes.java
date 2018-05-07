@@ -4,87 +4,80 @@ import java.util.ArrayList;
  * @author Maxime Martin
  * 
  */
-public class StreetNodes {
-    
-    private String streetName;
-    private ArrayList<Node<Point>> locationStreet;
-    
+public class StreetNodes implements Comparable<StreetNodes> {
+
+    private String name; // it's implied that it's a street name
+    private ArrayList<Node<Point>> locations; // same with locations.
+
     /**
      * 
      * @param street
+     *            name of street
      */
     public StreetNodes(String street) {
-        this.streetName=street;
-        locationStreet = new ArrayList<Node<Point>>();
+        this.name = street;
+        locations = new ArrayList<Node<Point>>();
     }
-    
+
     /**
-     * @return streetName, it is just the
-     * getter method for the streetName field
-     * O(1)
+     * @return streetName, it is just the getter method for the streetName field
+     *         O(1)
      */
-    public String getStreetName() {
-        return streetName;
-    }
-    /**
-     * 
-     * @param streetName it is just the
-     * setter method for the streetName field
-     * O(1)
-     */
-    public void setStreetName(String streetName) {
-        this.streetName = streetName;
+    public String getName() {
+        return name;
     }
 
     /**
      * 
-     * @return locationStreet, it is just the
-     * getter method for the streetName field
-     * O(1)
+     * @param name
+     *            it is just the setter method for the streetName field O(1)
      */
-    public ArrayList<Node<Point>>  getLocationStreet() {
-        return locationStreet;
+    public void setName(String name) {
+        this.name = name;
     }
+
     /**
      * 
-     * @param locationStreet it is just the
-     * setter method for the streetName field
-     * O(1)
+     * @return locationStreet, it is just the getter method for the streetName field
+     *         O(1)
      */
-    public void setLocationStreet(ArrayList<Node<Point>>  locationStreet) {
-        this.locationStreet = locationStreet;
+    public ArrayList<Node<Point>> getLocations() {
+        return locations;
     }
+
+    /**
+     * 
+     * @param locations
+     *            it is just the setter method for the streetName field O(1)
+     */
+    public void setLocations(ArrayList<Node<Point>> locations) {
+        this.locations = locations;
+    }
+
     /**
      * 
      * @param o
-     * @return an integer, 0 if they are the same name
-     * and 1 if they are different 
-     * O(1)
+     * @return an integer, 0 if they are the same name and 1 if they are different
+     *         O(1)
      */
     public int compareTo(StreetNodes o) {
-        if(o.getStreetName() == this.streetName) {
-            return 0;
-        }
-        else {
-            return 1;
-        }
+        // the previous implementation of compareTo was incorrect.
+        return name.compareTo(o.name);
+        // only compare street names
     }
-    
+
     /**
      * @param n
-     * @return location street
-     * O(1)
+     * @return location street O(1)
      */
     public boolean addPoint(Node<Point> n) {
-        return locationStreet.add(n);
-}   
+        return locations.add(n);
+    }
+
     /**
-     * @return streetName
-     * prints a string representation of
-     * then street name
+     * @return streetName prints a string representation of then street name
      */
     public String toString() {
-        String str = streetName + " " + locationStreet.toString();
-        return str;
+        return name + " " + locations.toString();
     }
 }
