@@ -33,6 +33,13 @@ public class Quad implements iQuad {
         botRightTree = null;
         bst = null;
     }
+    
+    /**
+     * @return this quad's bst
+     */
+    public BinarySearchTree<StreetNodes> getBst() {
+        return bst;
+    }
 
     /* (non-Javadoc)
      * @see iQuad#inQuad(Point)

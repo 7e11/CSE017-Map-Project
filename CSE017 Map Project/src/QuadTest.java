@@ -169,7 +169,28 @@ public class QuadTest extends TestCase {
      */
     @Test
     public void testInsertIntIntStringStringArray() {
+        String[] streetArray = new String[2];
+        streetArray[0] = "1st Street";
+        streetArray[1] = "2nd Street";
+        StreetNodes sNode1 = new StreetNodes(streetArray[0]);
+        StreetNodes sNode2 = new StreetNodes(streetArray[1]);
         
+        //topLeft insert
+        map.insert(0, 0, "baron", streetArray);
+        assertTrue(map.search(0, 0).getPlaces().contains("baron"));
+        assertEquals(sNode1, map.getBst().find(sNode1));
+        //top Right insert
+        map.insert(5, 0, "dragon", streetArray);
+        assertTrue(map.search(5, 0).getPlaces().contains("dragon"));
+        assertEquals(sNode2, map.getBst().find(sNode2));
+        //botLeft insert
+        map.insert(0, 5, "tower", streetArray);
+        assertTrue(map.search(0, 5).getPlaces().contains("tower"));
+        assertEquals(sNode1, map.getBst().find(sNode1));
+        //botRight insert
+        map.insert(5, 5, "nexus", streetArray);
+        assertTrue(map.search(5, 5).getPlaces().contains("nexus"));
+        assertEquals(sNode2, map.getBst().find(sNode2));
     }
     
     /**
