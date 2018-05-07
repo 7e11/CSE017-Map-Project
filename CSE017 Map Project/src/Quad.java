@@ -220,6 +220,12 @@ public class Quad implements iQuad {
         insert(newNode, streets);
     }
     
+    /**
+     * @param newNode
+     *            node containing coordinates and string from previous insert
+     *            method
+     * @param streets
+     */
     public void insert(Node<Point> newNode, String... streets) {
         if (newNode == null) {
             return;
@@ -227,21 +233,33 @@ public class Quad implements iQuad {
         if (!inQuad(newNode.getPoint())) {
             return;
         }
-        // if the node is already in the quad, stop the recursion
-        if (newNode.equals(search(newNode.getPoint()))) {
-            return;
+        
+        Node<Point> searchNode = search(newNode.getPoint());
+        
+        // if newNode was not previously added to the Quad, then insert newNode using the old insert method
+        // if these aren't null, they contain what newNode contains
+        if (!((searchNode != null) && (searchNode.getPlaces().equals(newNode.getPlaces())))) {
+            insert(newNode);
         }
-        insert(newNode);
         
         for (int i = 0; i < streets.length; i++) {
-            newNode.getPlaces().add(streets[i]);
+            //add street to the list of streets if it isn't already there
+            if (!newNode.getPlaces().contains(streets[i])) {
+                newNode.getPlaces().add(streets[i]);
+            }
+            
             StreetNodes sNode = new StreetNodes(streets[i]);
-            if (!bst.find(sNode).equals(sNode)) {
-                sNode.getPlaces().add(newNode.getPlaces());
+            
+            // if sNode is not in the BST, add newNode to sNode and insert sNode into the BST
+            if (bst.find(sNode) == null) {
+                sNode.addPoint(newNode);
                 bst.insert(sNode);
             }
+            
+            // if sNode is in the BST, then we get sNode from the BST and add
+            // newNode to the list of sNode’s Node<Point> data field
             else {
-                bst.find(sNode).getPlaces().add(newNode.getPlaces());
+                bst.find(sNode).addPoint(newNode);
             }
         }
     }

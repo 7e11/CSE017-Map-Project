@@ -15,7 +15,7 @@ public class Node<E> implements iNode<E> {
     private ArrayList<String> list;
     private double distance; 
     private ArrayList<String> adjacentStreet;
-    //These are the new added data field( dstance and adjStreet)
+    //These are the new added data field( distance and adjStreet)
     
     /**
      * O(1)
