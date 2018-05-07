@@ -20,7 +20,6 @@ public class NodeTest extends TestCase {
     private ArrayList<String> descriptions1;
     private ArrayList<String> descriptions2;
     private Point point1;
-    private Point point2;
     private Point point3;
     
     /**
@@ -31,7 +30,6 @@ public class NodeTest extends TestCase {
         list2 = new ArrayList<String>();
         node1 = new Node<Point>(new Point(1, 1), list1);
         point1 = new Point(1,1);
-        point2 = new Point(2,2);
         point3 = new Point(-2,-2);
         nd1 = new Node<Point>(point1, descriptions1);
         nd2 = new Node<Point>(point3, descriptions1);
