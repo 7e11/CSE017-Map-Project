@@ -33,8 +33,12 @@ public class NodeTest extends TestCase {
         point1 = new Point(1,1);
         point2 = new Point(2,2);
         point3 = new Point(-2,-2);
-        nd1 = new Node(point1, descriptions1);
-        nd2 = new Node(point3, descriptions1);
+        nd1 = new Node<Point>(point1, descriptions1);
+        nd2 = new Node<Point>(point3, descriptions1);
+        descriptions1 = new ArrayList<String>();
+        descriptions1.add("mon gars");
+        descriptions2 = new ArrayList<String>();
+        descriptions2.add(null);
     }
     
     /**
@@ -129,5 +133,25 @@ public class NodeTest extends TestCase {
         nd2.setDistance(3.0);
         assertEquals(4, nd1.compareTo(nd2));
         
+    }
+    
+    /**
+     * This is the test method for getStreet
+     */
+    public void testGetStreet() {
+        nd1.setStreets(descriptions1);
+        assertEquals("[mon gars]", nd1.getStreets().toString());
+        nd1.setStreets(descriptions2);
+        assertEquals("[null]", nd1.getStreets().toString());
+    }
+    
+    /**
+     * This is the test method for setStreet
+     */
+    public void testSetStreet() {
+        nd1.setStreets(descriptions1);
+        assertEquals("[mon gars]", nd1.getStreets().toString());
+        nd1.setStreets(descriptions2);
+        assertEquals("[null]", nd1.getStreets().toString());
     }
 }

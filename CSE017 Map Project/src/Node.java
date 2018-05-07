@@ -1,8 +1,5 @@
 import java.util.ArrayList;
 
-//import map.Node;
- //import map;
-
 /**
  * @author Evan Hruskar 33%
  * @author Cam 33%
@@ -12,10 +9,11 @@ import java.util.ArrayList;
  */
 public class Node<E> implements iNode<E> {
     private E data;
-    private ArrayList<String> list;
+    private ArrayList<String> list; //getter and setter
     private double distance; 
+    private ArrayList<String> streets; //streets
+    //These are the new added data field (distance and adjStreet)
     private ArrayList<String> adjacentStreet;
-    //These are the new added data field( distance and adjStreet)
     
     /**
      * O(1)
@@ -26,8 +24,8 @@ public class Node<E> implements iNode<E> {
     public Node(E data, ArrayList<String> list) {
         this.data = data;
         this.list = list;
-        this.setDistance(0);
-        this.adjacentStreet = adjacentStreet;
+        this.distance = 0;
+        this.setStreets(new ArrayList<String>());
         //initialized them in constructor
     }
 
@@ -92,20 +90,12 @@ public class Node<E> implements iNode<E> {
     
     /**
      * 
-     * @param E, take in a Node obj and 
-     * compares it to the current distance
+     * @param Node 
      * @return the difference in the distance
      * O(1)
      */
-    public int compareTo(Node<E> E) {
-        if(distance - E.getDistance() > 0) {
-            return (int) (distance - E.getDistance());
-        }
-        if (distance - E.getDistance() < 0) {
-            return (int) (distance - E.getDistance());
-        } else {
-            return 0;
-        }
+    public int compareTo(Node<E> Node) {
+            return (int) (distance - Node.getDistance());
         
     }
     
@@ -119,11 +109,30 @@ public class Node<E> implements iNode<E> {
     }
     
     /**
-     * @param distance, its the stter method for
+     * @param distance its the setter method for
      * distance
      * O(1)
      */
     public void setDistance(double distance) {
         this.distance = distance;
     }
+
+    /**
+     * @return streets its the getter for streets
+     * O(1)
+     */
+    public ArrayList<String> getStreets() {
+        return streets;
+    }
+
+    /**
+     * @param streets its the setter for the 
+     * streets data field
+     * O(1)
+     */
+    public void setStreets(ArrayList<String> streets) {
+        this.streets = streets;
+    }
+    
+    
 }
