@@ -283,7 +283,7 @@ public class Quad implements iQuad {
             return new ArrayList<Node<Point>>();
             //did this instead of returning null to make next methods easier.
         }
-        return bst.find(new StreetNodes(streetName)).getLocationStreet();
+        return bst.find(new StreetNodes(streetName)).getLocations();
     }
     
     /**
