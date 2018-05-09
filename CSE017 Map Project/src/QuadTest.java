@@ -146,22 +146,7 @@ public class QuadTest extends TestCase {
         map.insert(5, 5, "baron");
         map.insert(5, 5, "janna");
         
-        ArrayList<Node<Point>> check = new ArrayList<Node<Point>>();
-        ArrayList<String> places1 = new ArrayList<String>();
-        places1.add("baron");
-        places1.add("baron");
-        check.add(new Node<Point>(new Point(0, 0), places1));
-        ArrayList<String> places2 = new ArrayList<String>();
-        places2.add("baron");
-        places2.add("janna");
-        check.add(new Node<Point>(new Point(5, 5), places2));
-        
-        //assertEquals(check, map.search("baron"));
-        //expected:<[(0,0) - [baron, baron], (5,5) - [baron, janna]]> 
-        //but was: <[(0,0) - [baron, baron], (5,5) - [baron, janna]]>
-        //probably b/c node doesn't have a .equals()
-        //but it does have a toString() !
-        assertEquals(check.toString(), map.search("baron").toString());
+        assertEquals(2, map.search("baron").size());
     }
     
     /**
@@ -169,28 +154,35 @@ public class QuadTest extends TestCase {
      */
     @Test
     public void testInsertIntIntStringStringArray() {
-        String[] streetArray = new String[2];
-        streetArray[0] = "1st Street";
-        streetArray[1] = "2nd Street";
-        StreetNodes sNode1 = new StreetNodes(streetArray[0]);
-        StreetNodes sNode2 = new StreetNodes(streetArray[1]);
+        //empty map
+        //first null case
+        map.insert(0, 0, "center", "river", "midlane");
+        assertTrue(map.search(0, 0).getPlaces().contains("center"));
+        assertEquals(1, map.streetSearch("river").size()); //one location on street
+        assertEquals(1, map.streetSearch("midlane").size());
         
-        //topLeft insert
-        map.insert(0, 0, "baron", streetArray);
-        assertTrue(map.search(0, 0).getPlaces().contains("baron"));
-        assertEquals(sNode1, map.getBst().find(sNode1));
-        //top Right insert
-        map.insert(5, 0, "dragon", streetArray);
-        assertTrue(map.search(5, 0).getPlaces().contains("dragon"));
-        assertEquals(sNode2, map.getBst().find(sNode2));
-        //botLeft insert
-        map.insert(0, 5, "tower", streetArray);
-        assertTrue(map.search(0, 5).getPlaces().contains("tower"));
-        assertEquals(sNode1, map.getBst().find(sNode1));
-        //botRight insert
-        map.insert(5, 5, "nexus", streetArray);
-        assertTrue(map.search(5, 5).getPlaces().contains("nexus"));
-        assertEquals(sNode2, map.getBst().find(sNode2));
+        map.insert(0, 0, "anotherCenter", "river", "midlane");
+        //this will trigger the firstAdd clause (anotherCenter doesn't exist in 0,0)
+        //also, this assumes that the streets connected to a node don't change.
+        //the new streets get added to the bst, but they arnen't added to the node?
+        assertTrue(map.search(0, 0).getPlaces().contains("anotherCenter"));
+        //now add the same node again to not trigger firstAdd
+        map.insert(0, 0, "center", "river", "midlane", "toplane");
+        assertTrue(map.search(0, 0).getPlaces().contains("center"));
+        assertTrue(map.search(0, 0).getPlaces().contains("anotherCenter"));
+        //now check all the streets exist...
+        assertEquals(1, map.streetSearch("river").size()); //two location on street
+        assertEquals(1, map.streetSearch("midlane").size());
+        assertEquals(1, map.streetSearch("toplane").size()); //one one location on street
+        //remeber, all of this is still stored in just one node.
+        //after all, they have the same point, the places are just appended to eachother.
+        //try another node.
+        map.insert(1, 1, "baron", "midlane", "toplane");
+        map.insert(2, 2, "dragon", "botlane", "toplane");
+        assertEquals(1, map.streetSearch("river").size());
+        assertEquals(2, map.streetSearch("midlane").size());
+        assertEquals(3, map.streetSearch("toplane").size());
+        assertEquals(1, map.streetSearch("botlane").size());
     }
     
     /**
